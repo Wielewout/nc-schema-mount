@@ -1,0 +1,14 @@
+{
+  "dockerFile": "Containerfile",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "type=bind,source=${localWorkspaceFolder},destination=/workspace",
+  "overrideCommand": false,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck"
+      ]
+    }
+  }
+}
