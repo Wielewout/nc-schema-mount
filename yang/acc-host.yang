@@ -5,7 +5,6 @@ module acc-host {
 
   import ietf-yang-schema-mount {
     prefix yangmnt;
-    // Revision date used by most modern installations (RFC 8528)
     revision-date 2019-01-14;
   }
 
@@ -25,5 +24,3 @@ module acc-host {
        ietf-yang-schema-mount operational data provided by the companion app.";
   }
 }
-
-

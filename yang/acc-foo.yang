@@ -5,7 +5,6 @@ module acc-foo {
 
 
   organization "Accelleran NV";
-
   contact
     "www.accelleran.com";
 
