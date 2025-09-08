@@ -1,0 +1,30 @@
+module acc-host {
+  yang-version 1.1;
+  namespace "urn:acc:host:1.0";
+  prefix "acc-host";
+
+  import ietf-yang-schema-mount {
+    prefix yangmnt;
+    // Revision date used by most modern installations (RFC 8528)
+    revision-date 2019-01-14;
+  }
+
+  organization "Accelleran NV";
+  contact
+    "www.accelleran.com";
+
+  revision "2025-09-05" {
+    description
+      "Host module exposing a mount-point at /acc-host:test.";
+  }
+
+  container test {
+    yangmnt:mount-point "test";
+    config false;
+    description
+      "Mount-point container. A separate schema context is mounted here via
+       ietf-yang-schema-mount operational data provided by the companion app.";
+  }
+}
+
+

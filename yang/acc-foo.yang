@@ -1,0 +1,30 @@
+module acc-foo {
+  yang-version 1.1;
+  namespace "urn:acc:foo:1.0";
+  prefix "acc-foo";
+
+
+  organization "Accelleran NV";
+
+  contact
+    "www.accelleran.com";
+
+  revision "2025-09-05" {
+    description
+      "Initial version";
+  }
+
+  container foo {
+    config false;
+
+    leaf bar {
+      type string;
+    }
+  }
+
+  container bla {
+    leaf blabla {
+      type string;
+    }
+  }
+}
