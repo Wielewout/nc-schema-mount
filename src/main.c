@@ -13,7 +13,7 @@ static volatile sig_atomic_t g_stop = 0;
 
 int set_schema_mount(sr_session_ctx_t *sess) {
   const char *inline_path = \
-    "/ietf-yang-schema-mount:schema-mounts/mount-point[module='acc-host'][label='test']/inline";
+    "/ietf-yang-schema-mount:schema-mounts/mount-point[module='acc-host'][label='test-root']/inline";
   if (sr_set_item_str(sess, inline_path, NULL, NULL, SR_EDIT_DEFAULT) != SR_ERR_OK) {
     fprintf(stderr, "Failed to create inline mount node at %s\n", inline_path);
     return 1;
