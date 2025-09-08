@@ -20,7 +20,6 @@ module acc-host {
 
   container test {
     yangmnt:mount-point "test";
-    config false;
     description
       "Mount-point container. A separate schema context is mounted here via
        ietf-yang-schema-mount operational data provided by the companion app.";
