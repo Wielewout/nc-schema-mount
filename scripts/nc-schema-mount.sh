@@ -13,6 +13,11 @@ if ! sysrepoctl -l | awk '{print $1}' | grep -qx acc-host; then
     sysrepoctl -i "$YANG_DIR/acc-host.yang"
 fi
 
+echo "Installing acc-foo module if needed..."
+if ! sysrepoctl -l | awk '{print $1}' | grep -qx acc-foo; then
+    sysrepoctl -i "$YANG_DIR/acc-foo.yang"
+fi
+
 echo "Copying acc-foo module if needed..."
 if [ ! -f "$SR_YANG_DIR/acc-foo.yang" ]; then
     cp "$YANG_DIR/acc-foo.yang" "$SR_YANG_DIR/acc-foo.yang"
