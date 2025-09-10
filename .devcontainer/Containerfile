@@ -136,3 +136,5 @@ RUN git config --global --add safe.directory /workspace
 
 ENTRYPOINT [ "/bin/sh" ]
 CMD [ "-c", "/usr/bin/tail -f /dev/null" ]
+
+RUN apk update && apk add gdb

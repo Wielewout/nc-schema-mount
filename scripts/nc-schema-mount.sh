@@ -24,4 +24,4 @@ if [ ! -f "$SR_YANG_DIR/acc-foo.yang" ]; then
 fi
 
 echo "Starting nc-schema-mount"
-"$SCRIPT_DIR/build/nc-schema-mount" -s "$YANG_DIR"
+gdb "$SCRIPT_DIR/build/nc-schema-mount" -s "$YANG_DIR"
