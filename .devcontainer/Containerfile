@@ -54,20 +54,20 @@ RUN apk update && \
     procps-ng
 
 # renovate: github_repository=CESNET/libyang releases extract_version=^v(?<version>.*)$
-ARG LIBYANG_VERSION="3.13.5"
+ARG LIBYANG_VERSION="devel"
 # renovate: github_repository=sysrepo/sysrepo releases extract_version=^v(?<version>.*)$
-ARG SYSREPO_VERSION="3.7.11" 
+ARG SYSREPO_VERSION="devel" 
 # renovate: github_repository=CESNET/libnetconf2 releases extract_version=^v(?<version>.*)$
-ARG LIBNETCONF2_VERSION="3.7.10"
+ARG LIBNETCONF2_VERSION="devel"
 # renovate: github_repository=CESNET/netopeer2 releases extract_version=^v(?<version>.*)$
-ENV NETOPEER2_VERSION="2.4.5"
+ENV NETOPEER2_VERSION="devel"
 
 # static
-ARG CMAKE_ARGS="-DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release"
+ARG CMAKE_ARGS="-DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug"
 
 RUN mkdir -p libyang && cd libyang && \
-    curl -fsSL -o "v${LIBYANG_VERSION}.tar.gz" "https://github.com/CESNET/libyang/archive/refs/tags/v${LIBYANG_VERSION}.tar.gz" && \
-    tar -xz -f "v${LIBYANG_VERSION}.tar.gz" && \
+    curl -fsSL -o "${LIBYANG_VERSION}.tar.gz" "https://github.com/CESNET/libyang/archive/refs/heads/${LIBYANG_VERSION}.tar.gz" && \
+    tar -xz -f "${LIBYANG_VERSION}.tar.gz" && \
     cd "libyang-${LIBYANG_VERSION}" && \
     mkdir build && cd build && \
     PKG_CONFIG_ALL_STATIC=1 PKG_CONFIG_STATIC=1 cmake ${CMAKE_ARGS} .. && \
@@ -76,8 +76,8 @@ RUN mkdir -p libyang && cd libyang && \
     cd ../../.. && rm -rf libyang
 
 RUN mkdir -p sysrepo && cd sysrepo && \
-    curl -fsSL -o "v${SYSREPO_VERSION}.tar.gz" "https://github.com/sysrepo/sysrepo/archive/refs/tags/v${SYSREPO_VERSION}.tar.gz" && \
-    tar -xz -f "v${SYSREPO_VERSION}.tar.gz" && \
+    curl -fsSL -o "${SYSREPO_VERSION}.tar.gz" "https://github.com/sysrepo/sysrepo/archive/refs/heads/${SYSREPO_VERSION}.tar.gz" && \
+    tar -xz -f "${SYSREPO_VERSION}.tar.gz" && \
     cd "sysrepo-${SYSREPO_VERSION}" && \
     sed -i '/find_package(LibYANG/a list(APPEND LIBYANG_LIBRARIES pcre2-8)' CMakeLists.txt && \
     mkdir build && cd build && \
@@ -87,11 +87,11 @@ RUN mkdir -p sysrepo && cd sysrepo && \
     cd ../../.. && rm -rf sysrepo
 
 # dynamic
-ARG CMAKE_ARGS="-DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release"
+ARG CMAKE_ARGS="-DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug"
 
 RUN mkdir -p libyang && cd libyang && \
-    curl -fsSL -o "v${LIBYANG_VERSION}.tar.gz" "https://github.com/CESNET/libyang/archive/refs/tags/v${LIBYANG_VERSION}.tar.gz" && \
-    tar -xz -f "v${LIBYANG_VERSION}.tar.gz" && \
+    curl -fsSL -o "${LIBYANG_VERSION}.tar.gz" "https://github.com/CESNET/libyang/archive/refs/heads/${LIBYANG_VERSION}.tar.gz" && \
+    tar -xz -f "${LIBYANG_VERSION}.tar.gz" && \
     cd "libyang-${LIBYANG_VERSION}" && \
     mkdir build && cd build && \
     cmake ${CMAKE_ARGS} .. && \
@@ -100,8 +100,8 @@ RUN mkdir -p libyang && cd libyang && \
     cd ../../.. && rm -rf libyang
 
 RUN mkdir -p sysrepo && cd sysrepo && \
-    curl -fsSL -o "v${SYSREPO_VERSION}.tar.gz" "https://github.com/sysrepo/sysrepo/archive/refs/tags/v${SYSREPO_VERSION}.tar.gz" && \
-    tar -xz -f "v${SYSREPO_VERSION}.tar.gz" && \
+    curl -fsSL -o "${SYSREPO_VERSION}.tar.gz" "https://github.com/sysrepo/sysrepo/archive/refs/heads/${SYSREPO_VERSION}.tar.gz" && \
+    tar -xz -f "${SYSREPO_VERSION}.tar.gz" && \
     cd "sysrepo-${SYSREPO_VERSION}" && \
     mkdir build && cd build && \
     cmake ${CMAKE_ARGS} -DENABLE_EXAMPLES=OFF .. && \
@@ -110,8 +110,8 @@ RUN mkdir -p sysrepo && cd sysrepo && \
     cd ../../.. && rm -rf sysrepo
 
 RUN mkdir -p libnetconf2 && cd libnetconf2 && \
-    curl -fsSL -o "v${LIBNETCONF2_VERSION}.tar.gz" "https://github.com/CESNET/libnetconf2/archive/refs/tags/v${LIBNETCONF2_VERSION}.tar.gz" && \
-    tar -xz -f "v${LIBNETCONF2_VERSION}.tar.gz" && \
+    curl -fsSL -o "${LIBNETCONF2_VERSION}.tar.gz" "https://github.com/CESNET/libnetconf2/archive/refs/heads/${LIBNETCONF2_VERSION}.tar.gz" && \
+    tar -xz -f "${LIBNETCONF2_VERSION}.tar.gz" && \
     cd "libnetconf2-${LIBNETCONF2_VERSION}" && \
     mkdir build && cd build && \
     cmake ${CMAKE_ARGS} -DENABLE_EXAMPLES=OFF .. && \
@@ -120,8 +120,8 @@ RUN mkdir -p libnetconf2 && cd libnetconf2 && \
     cd ../../.. && rm -rf libnetconf2
 
 RUN mkdir -p netopeer2 && cd netopeer2 && \
-    curl -fsSL -o "v${NETOPEER2_VERSION}.tar.gz" "https://github.com/CESNET/netopeer2/archive/refs/tags/v${NETOPEER2_VERSION}.tar.gz" && \
-    tar -xz -f "v${NETOPEER2_VERSION}.tar.gz" && \
+    curl -fsSL -o "${NETOPEER2_VERSION}.tar.gz" "https://github.com/CESNET/netopeer2/archive/refs/heads/${NETOPEER2_VERSION}.tar.gz" && \
+    tar -xz -f "${NETOPEER2_VERSION}.tar.gz" && \
     cd "netopeer2-${NETOPEER2_VERSION}" && \
     mkdir build && cd build && \
     cmake ${CMAKE_ARGS} -DLN2_YANG_MODULE_DIR=/usr/share/yang/modules/libnetconf2 .. && \
